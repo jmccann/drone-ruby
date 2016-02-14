@@ -1,45 +1,41 @@
 build:
   image: ruby:$$RUBY_VERSION-alpine
 
-  environment:
-    - DRONE_SERVER=http://127.0.0.1:8000
-    - DRONE_TOKEN=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0ZXh0Ijoib2N0b2NhdCIsInR5cGUiOiJ1c2VyIn0.JtytoXhBb829-8V3W3T6SiXIP_NabrtA9tALItuQyqw
-
   commands:
-    - apk -U add sqlite3
-    - sqlite3 -init spec/fixtures/data.sql /drone/test.db
+    - apk -U add build-base
 
-    - bundle install
-    - bundle exec rake
+    - bin/setup
+    - bin/rake
 
-compose:
-  drone:
-    pull: true
-    image: drone/drone:0.4
-    environment:
-      - REMOTE_DRIVER=github
-      - REMOTE_CONFIG=https://github.com
-      - DATABASE_DRIVER=sqlite3
-      - DATABASE_CONFIG=/drone/test.db
+cache:
+  mount:
+    - gems
 
 publish:
   coverage:
+    include: coverage/lcov/drone-ruby.lcov
     when:
       branch: master
+      matrix:
+        RUBY_VERSION: 2.3
 
   rubygem:
     api_key: $$RUBYGEMS_APIKEY
     name: droneio
     when:
       event: tag
+      matrix:
+        RUBY_VERSION: 2.3
 
   github_release:
     api_key: $$GITHUB_APIKEY
     when:
       event: tag
+      matrix:
+        RUBY_VERSION: 2.3
 
 matrix:
   RUBY_VERSION:
-    - 2.1
-    - 2.2
+    # - 2.1
+    # - 2.2
     - 2.3
