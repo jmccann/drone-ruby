@@ -13,7 +13,6 @@ cache:
 
 publish:
   coverage:
-    include: coverage/lcov/drone-ruby.lcov
     when:
       branch: master
       matrix:
