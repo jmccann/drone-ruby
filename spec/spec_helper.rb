@@ -17,11 +17,17 @@
 require "simplecov"
 require "simplecov-lcov"
 
-SimpleCov::Formatter::LcovFormatter.report_with_single_file = true
-SimpleCov.formatter = SimpleCov::Formatter::LcovFormatter
+SimpleCov::Formatter::LcovFormatter.tap do |config|
+  config.report_with_single_file = true
+end
 
 SimpleCov.start do
   add_filter "/spec"
+
+  formatter SimpleCov::Formatter::MultiFormatter.new [
+    SimpleCov::Formatter::HTMLFormatter,
+    SimpleCov::Formatter::LcovFormatter
+  ]
 end
 
 require "drone"
