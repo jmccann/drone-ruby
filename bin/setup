@@ -1,0 +1,5 @@
+#!/usr/bin/env ruby
+Dir.chdir File.expand_path("../..", __FILE__) do
+  puts "\n== Install gem dependencies =="
+  system "bin/bundle check || bin/bundle install --path=gems --retry=5 --jobs=5"
+end
