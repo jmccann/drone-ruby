@@ -6,6 +6,12 @@
 
 Ruby client for the Drone API
 
+## Install
+
+To install this simple rubygem you can add `gem "droneio"` to your Gemfile or
+`s.add_runtime_dependency "droneio", ">= 1.0.0"` to your Gemspec, as this gem
+doesn't provide any bin script it doesn't make sense to install it standalone.
+
 ## Client
 
 You can use this library as a client to communicate with any Drone instance
@@ -43,11 +49,9 @@ Fork -> Patch -> Spec -> Push -> Pull Request
 * [Thomas Boerger](https://github.com/tboerger)
 * [Other contributors](https://github.com/drone/drone-ruby/graphs/contributors)
 
-
 ## License
 
 Apache-2.0
-
 
 ## Copyright
 
