@@ -23,6 +23,7 @@ end
 
 SimpleCov.start do
   add_filter "/spec"
+  add_filter "/gems"
 
   formatter SimpleCov::Formatter::MultiFormatter.new [
     SimpleCov::Formatter::HTMLFormatter,
