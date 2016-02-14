@@ -23,6 +23,10 @@ compose:
       - DATABASE_CONFIG=/drone/test.db
 
 publish:
+  coverage:
+    when:
+      branch: master
+
   rubygem:
     api_key: $$RUBYGEMS_APIKEY
     name: droneio
