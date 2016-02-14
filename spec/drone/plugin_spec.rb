@@ -18,5 +18,28 @@ require_relative "../spec_helper"
 
 describe Drone::Plugin do
   subject { ::Drone::Plugin }
-  pending
+
+  context "with valid input" do
+    it "returns a payload" do
+      expect(
+        subject.new("{}").parse
+      ).to(
+        be_a(
+          Drone::Payload
+        )
+      )
+    end
+  end
+
+  context "with broken input" do
+    it "raises an exception" do
+      expect do
+        subject.new("{").parse
+      end.to(
+        raise_error(
+          Drone::InvalidJsonError
+        )
+      )
+    end
+  end
 end

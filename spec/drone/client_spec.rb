@@ -18,5 +18,4 @@ require_relative "../spec_helper"
 
 describe Drone::Client do
   subject { ::Drone::Client }
-  pending
 end

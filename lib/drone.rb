@@ -15,7 +15,7 @@
 #
 
 module Drone
-  class InvalidJson < StandardError
+  class InvalidJsonError < StandardError
   end
 
   autoload :Version,

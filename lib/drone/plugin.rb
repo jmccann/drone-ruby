@@ -33,7 +33,7 @@ module Drone
         )
       end
     rescue MultiJson::ParseError
-      raise InvalidJson
+      raise InvalidJsonError
     end
   end
 end
