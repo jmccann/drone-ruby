@@ -17,10 +17,19 @@
 require "virtus"
 
 module Drone
+  #
+  # Represent `key` JSON as a model
+  #
   class Key
-    include Virtus.model
+    # Workaround to include virtus without YARD warning
+    send :include, Virtus.model
 
+    # @!attribute public
+    #   @return [String] the public SSH key
     attribute :public, String
+
+    # @!attribute private
+    #   @return [String] the private SSH key
     attribute :private, String
   end
 end

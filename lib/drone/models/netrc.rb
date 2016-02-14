@@ -17,11 +17,23 @@
 require "virtus"
 
 module Drone
+  #
+  # Represent `netrc` JSON as a model
+  #
   class Netrc
-    include Virtus.model
+    # Workaround to include virtus without YARD warning
+    send :include, Virtus.model
 
+    # @!attribute machine
+    #   @return [String] the host for the netrc
     attribute :machine, String
+
+    # @!attribute login
+    #   @return [String] the username for the netrc
     attribute :login, String
+
+    # @!attribute password
+    #   @return [String] the password for the netrc
     attribute :password, String
   end
 end

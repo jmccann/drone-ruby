@@ -17,23 +17,71 @@
 require "virtus"
 
 module Drone
+  #
+  # Represent `repo` JSON as a model
+  #
   class Repo
-    include Virtus.model
+    # Workaround to include virtus without YARD warning
+    send :include, Virtus.model
 
+    # @!attribute id
+    #   @return [Integer] the ID of the repo
     attribute :id, Integer
+
+    # @!attribute owner
+    #   @return [String] the owner name
     attribute :owner, String
+
+    # @!attribute name
+    #   @return [String] the repo name
     attribute :name, String
+
+    # @!attribute full_name
+    #   @return [String] the full repo name
     attribute :full_name, String
+
+    # @!attribute avatar
+    #   @return [String] the URL to the repo avatar
     attribute :avatar, String
+
+    # @!attribute link
+    #   @return [String] the URL to the repo website
     attribute :link, String
+
+    # @!attribute clone
+    #   @return [String] the URL to the repo SCM system
     attribute :clone, String
+
+    # @!attribute branch
+    #   @return [String] the repo default branch
     attribute :branch, String
+
+    # @!attribute timeout
+    #   @return [Integer] the timeout value
     attribute :timeout, Integer
+
+    # @!attribute private
+    #   @return [Boolean] the flag if repo is private
     attribute :private, Boolean
+
+    # @!attribute trusted
+    #   @return [Boolean] the flag if the repo is trusted
     attribute :trusted, Boolean
+
+    # @!attribute pr
+    #   @return [Boolean] the flag if pull requests are allowed
     attribute :pr, Boolean
+
+    # @!attribute push
+    #   @return [Boolean] the flag if pushs are allowed
     attribute :push, Boolean
+
+    # @!attribute deploys
+    #   @return [String] the flag if deploys are allowed
     attribute :deploys, Boolean
+
+    # @!attribute tags
+    #   @return [String] the flag if tags are allowed
     attribute :tags, Boolean
   end
 end

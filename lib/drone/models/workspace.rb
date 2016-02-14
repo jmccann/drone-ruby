@@ -17,12 +17,27 @@
 require "virtus"
 
 module Drone
+  #
+  # Represent `workspace` JSON as a model
+  #
   class Workspace
-    include Virtus.model
+    # Workaround to include virtus without YARD warning
+    send :include, Virtus.model
 
+    # @!attribute root
+    #   @return [String] the root path of the workspace
     attribute :root, String
+
+    # @!attribute path
+    #   @return [String] the absolute path to the source
     attribute :path, String
+
+    # @!attribute netrc
+    #   @return [Drone::Netrc] the netrc configuration
     attribute :netrc, Netrc
+
+    # @!attribute keys
+    #   @return [Drone::Key] the key configuration
     attribute :keys, Key
   end
 end

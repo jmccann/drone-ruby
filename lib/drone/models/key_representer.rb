@@ -17,10 +17,18 @@
 require "representable/json"
 
 module Drone
+  #
+  # Transform `key` JSON payload
+  #
   class KeyRepresenter < Representable::Decorator
     include Representable::JSON
 
+    # @!attribute public
+    #   @return [String] the public SSH key
     property :public
+
+    # @!attribute private
+    #   @return [String] the private SSH key
     property :private
   end
 end

@@ -17,18 +17,32 @@
 require "representable/json"
 
 module Drone
+  #
+  # Transform `system` JSON payload
+  #
   class SystemRepresenter < Representable::Decorator
     include Representable::JSON
 
+    # @!attribute version
+    #   @return [String] the version of the Drone server
     property :version
 
-    collection :plugins
-    collection :globals
-
+    # @!attribute link
+    #   @return [String] the link to the Drone server
     property :link,
       as: :link_url
 
+    # @!attribute plugins
+    #   @return [Array] the used plugins within the build
+    collection :plugins
+
+    # @!attribute privileged
+    #   @return [Array] the list of privileged plugins
     collection :privileged,
       as: :privileged_plugins
+
+    # @!attribute globals
+    #   @return [Array] the used global environment vars
+    collection :globals
   end
 end

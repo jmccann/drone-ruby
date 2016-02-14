@@ -18,15 +18,34 @@ require "hashie"
 require "virtus"
 
 module Drone
+  #
+  # Represent toplevel JSON as a model
+  #
   class Payload
-    include Virtus.model
+    # Workaround to include virtus without YARD warning
+    send :include, Virtus.model
 
+    # @!attribute repo
+    #   @return [Drone::Repo] the repo configuration
     attribute :repo, Repo
+
+    # @!attribute system
+    #   @return [Drone::System] the system configuration
     attribute :system, System
+
+    # @!attribute build
+    #   @return [Drone::Build] the build configuration
     attribute :build, Build
+
+    # @!attribute workspace
+    #   @return [Drone::Workspace] the workspace configuration
     attribute :workspace, Workspace
+
+    # @!attribute vargs
+    #   @return [Hash] the plugin specific payload
     attribute :vargs, Hash
 
+    # @return [Hashie::Mash] the plugin specific payload
     def vargs
       Hashie::Mash.new(
         super

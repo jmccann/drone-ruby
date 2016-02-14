@@ -15,6 +15,9 @@
 #
 
 module Drone
+  #
+  # Current version of the Ruby client
+  #
   class Version
     MAJOR = 1
     MINOR = 0
@@ -23,6 +26,9 @@ module Drone
     PRE = nil
 
     class << self
+      # Return the current version
+      #
+      # @return [String] the current version of the implementation
       def to_s
         [MAJOR, MINOR, PATCH, PRE].compact.join(".")
       end

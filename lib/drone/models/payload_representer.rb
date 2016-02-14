@@ -17,25 +17,38 @@
 require "representable/json"
 
 module Drone
+  #
+  # Transform toplevel JSON payload
+  #
   class PayloadRepresenter < Representable::Decorator
     include Representable::JSON
 
+    # @!attribute repo
+    #   @return [Drone::Repo] the repo configuration
     property :repo,
       decorator: RepoRepresenter,
       class: Repo
 
+    # @!attribute system
+    #   @return [Drone::System] the system configuration
     property :system,
       decorator: SystemRepresenter,
       class: System
 
+    # @!attribute build
+    #   @return [Drone::Build] the build configuration
     property :build,
       decorator: BuildRepresenter,
       class: Build
 
+    # @!attribute workspace
+    #   @return [Drone::Workspace] the workspace configuration
     property :workspace,
       decorator: WorkspaceRepresenter,
       class: Workspace
 
+    # @!attribute vargs
+    #   @return [Hash] the plugin specific payload
     property :vargs
   end
 end

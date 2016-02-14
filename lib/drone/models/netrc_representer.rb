@@ -17,11 +17,22 @@
 require "representable/json"
 
 module Drone
+  #
+  # Transform `netrc` JSON payload
+  #
   class NetrcRepresenter < Representable::Decorator
     include Representable::JSON
 
+    # @!attribute machine
+    #   @return [String] the host for the netrc
     property :machine
+
+    # @!attribute login
+    #   @return [String] the username for the netrc
     property :login
+
+    # @!attribute password
+    #   @return [String] the password for the netrc
     property :password
   end
 end

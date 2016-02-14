@@ -15,6 +15,9 @@
 #
 
 module Drone
+  #
+  # Client implementation for Drone
+  #
   class Client
   end
 end

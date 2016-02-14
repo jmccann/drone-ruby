@@ -17,13 +17,31 @@
 require "virtus"
 
 module Drone
+  #
+  # Represent `system` JSON as a model
+  #
   class System
-    include Virtus.model
+    # Workaround to include virtus without YARD warning
+    send :include, Virtus.model
 
+    # @!attribute version
+    #   @return [String] the version of the Drone server
     attribute :version, String
+
+    # @!attribute link
+    #   @return [String] the link to the Drone server
     attribute :link, String
+
+    # @!attribute plugins
+    #   @return [Array] the used plugins within the build
     attribute :plugins, Array[String]
+
+    # @!attribute privileged
+    #   @return [Array] the list of privileged plugins
     attribute :privileged, Array[String]
+
+    # @!attribute globals
+    #   @return [Array] the used global environment vars
     attribute :globals, Array[String]
   end
 end

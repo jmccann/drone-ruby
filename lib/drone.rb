@@ -14,7 +14,13 @@
 # limitations under the License.
 #
 
+#
+# Ruby client for the Drone API
+#
 module Drone
+  #
+  # Error for invalid/unparseable JSON
+  #
   class InvalidJsonError < StandardError
   end
 

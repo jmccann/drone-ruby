@@ -17,13 +17,24 @@
 require "json"
 
 module Drone
+  #
+  # Plugin payload parser for Drone
+  #
   class Plugin
     attr_accessor :input
 
+    # Initialize the plugin parser
+    #
+    # @param input [String] the JSON as a string to parse
+    # @return [Drone::Plugin] the instance of that class
     def initialize(input)
       self.input = input
     end
 
+    # Parse the provided payload
+    #
+    # @return [Drone::Payload] the parsed payload within model
+    # @raise [Drone::InvalidJsonError] if the provided JSON is invalid
     def parse
       Payload.new.tap do |payload|
         PayloadRepresenter.new(

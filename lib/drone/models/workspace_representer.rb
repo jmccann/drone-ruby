@@ -17,16 +17,28 @@
 require "representable/json"
 
 module Drone
+  #
+  # Transform `workspace` JSON payload
+  #
   class WorkspaceRepresenter < Representable::Decorator
     include Representable::JSON
 
+    # @!attribute root
+    #   @return [String] the root path of the workspace
     property :root
+
+    # @!attribute path
+    #   @return [String] the absolute path to the source
     property :path
 
+    # @!attribute netrc
+    #   @return [Drone::Netrc] the netrc configuration
     property :netrc,
       decorator: NetrcRepresenter,
       class: Netrc
 
+    # @!attribute keys
+    #   @return [Drone::Key] the key configuration
     property :keys,
       decorator: KeyRepresenter,
       class: Key
