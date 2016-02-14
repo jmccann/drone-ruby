@@ -22,7 +22,7 @@ TBD
 ```
 
 If you want to know more details about the available methods, please take a
-look at the [documentation]().
+look at the [documentation](http://www.rubydoc.info/gems/droneio/Drone/Client).
 
 ## Plugin
 
@@ -38,7 +38,7 @@ end
 ```
 
 If you want to know more details about the available methods, please take a
-look at the [documentation]().
+look at the [documentation](http://www.rubydoc.info/gems/droneio/Drone/Plugin).
 
 ## Contributing
 
