@@ -14,10 +14,21 @@
 # limitations under the License.
 #
 
-require_relative "../spec_helper"
+require "spec_helper"
+require "stringio"
 
 describe Drone::Plugin do
   subject { ::Drone::Plugin }
+
+  before do
+    $stdout = StringIO.new
+    $stderr = StringIO.new
+  end
+
+  after do
+    $stdout = STDOUT
+    $stderr = STDERR
+  end
 
   context "with valid input" do
     it "returns a payload" do
@@ -28,6 +39,26 @@ describe Drone::Plugin do
           Drone::Payload
         )
       )
+    end
+
+    context "passed a block" do
+      it "returns a payload" do
+        payload = subject.new('{"vargs": {"name": "johndoe"}}').parse.tap do |p|
+          puts "name: #{p.vargs.name}"
+        end
+
+        expect(payload).to be_a Drone::Payload
+        expect($stdout.string).to match "name: johndoe"
+      end
+
+      it "returns a plugin" do
+        plugin = subject.new('{"vargs": {"name": "johndoe"}}') do |p|
+          puts "name: #{p.vargs.name}"
+        end
+
+        expect(plugin).to be_a Drone::Plugin
+        expect($stdout.string).to match "name: johndoe"
+      end
     end
   end
 

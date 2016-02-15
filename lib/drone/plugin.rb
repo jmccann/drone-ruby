@@ -29,6 +29,14 @@ module Drone
     # @return [Drone::Plugin] the instance of that class
     def initialize(input)
       self.input = input
+
+      return self unless block_given?
+
+      parse.tap do |p|
+        yield p
+      end
+
+      self
     end
 
     # Parse the provided payload
