@@ -22,6 +22,7 @@ module Drone
   #
   class Plugin
     attr_accessor :input
+    attr_accessor :result
 
     # Initialize the plugin parser
     #
@@ -30,13 +31,9 @@ module Drone
     def initialize(input)
       self.input = input
 
-      return self unless block_given?
-
-      parse.tap do |p|
-        yield p
-      end
-
-      self
+      yield(
+        parse
+      ) if block_given?
     end
 
     # Parse the provided payload
@@ -44,7 +41,7 @@ module Drone
     # @return [Drone::Payload] the parsed payload within model
     # @raise [Drone::InvalidJsonError] if the provided JSON is invalid
     def parse
-      Payload.new.tap do |payload|
+      self.result ||= Payload.new.tap do |payload|
         PayloadRepresenter.new(
           payload
         ).from_json(

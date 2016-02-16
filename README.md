@@ -31,7 +31,7 @@ to parse the defined payload that plugins need to accept. Below you can see an
 example how you can use this functionality within your plugin.
 
 ```ruby
-Drone::Plugin.new(STDIN).parse.tap do |payload|
+Drone::Plugin.new(STDIN) do |payload|
   puts "Plugin execution for #{payload.repo.full_name}"
   puts "You are providing those arguments: #{payload.vargs}"
 end

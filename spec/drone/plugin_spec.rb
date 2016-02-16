@@ -30,10 +30,36 @@ describe Drone::Plugin do
     $stderr = STDERR
   end
 
+  let(:valid_input) do
+    "{\"vargs\": {\"name\": \"johndoe\"}}"
+  end
+
+  let(:invalid_input) do
+    "{\"vargs\": {}"
+  end
+
   context "with valid input" do
-    it "returns a payload" do
+    it "returns a plugin" do
+      instance = subject.new(
+        valid_input
+      )
+
       expect(
-        subject.new("{}").parse
+        instance
+      ).to(
+        be_a(
+          Drone::Plugin
+        )
+      )
+    end
+
+    it "returns a payload" do
+      instance = subject.new(
+        valid_input
+      ).parse
+
+      expect(
+        instance
       ).to(
         be_a(
           Drone::Payload
@@ -43,21 +69,17 @@ describe Drone::Plugin do
 
     context "passed a block" do
       it "returns a payload" do
-        payload = subject.new('{"vargs": {"name": "johndoe"}}').parse.tap do |p|
-          puts "name: #{p.vargs.name}"
+        subject.new(valid_input) do |p|
+          $stdout.puts "name: #{p.vargs.name}"
         end
 
-        expect(payload).to be_a Drone::Payload
-        expect($stdout.string).to match "name: johndoe"
-      end
-
-      it "returns a plugin" do
-        plugin = subject.new('{"vargs": {"name": "johndoe"}}') do |p|
-          puts "name: #{p.vargs.name}"
-        end
-
-        expect(plugin).to be_a Drone::Plugin
-        expect($stdout.string).to match "name: johndoe"
+        expect(
+          $stdout.string
+        ).to(
+          match(
+            "name: johndoe"
+          )
+        )
       end
     end
   end
@@ -65,7 +87,9 @@ describe Drone::Plugin do
   context "with broken input" do
     it "raises an exception" do
       expect do
-        subject.new("{").parse
+        subject.new(
+          invalid_input
+        ).parse
       end.to(
         raise_error(
           Drone::InvalidJsonError
