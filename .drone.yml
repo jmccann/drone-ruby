@@ -1,0 +1,41 @@
+build:
+  image: ruby:$$RUBY_VERSION-alpine
+
+  commands:
+    - apk -U add build-base
+
+    - bundle install --path=gems --retry=5 --jobs=5
+    - bin/rake
+
+cache:
+  mount:
+    - gems
+
+publish:
+  coverage:
+    include: coverage/lcov/drone-ruby.lcov
+    when:
+      branch: master
+      matrix:
+        RUBY_VERSION: 2.3
+
+  rubygem:
+    api_key: $$RUBYGEMS_APIKEY
+    name: droneio
+    when:
+      event: tag
+      matrix:
+        RUBY_VERSION: 2.3
+
+  github_release:
+    api_key: $$GITHUB_APIKEY
+    when:
+      event: tag
+      matrix:
+        RUBY_VERSION: 2.3
+
+matrix:
+  RUBY_VERSION:
+    - 2.1
+    - 2.2
+    - 2.3
