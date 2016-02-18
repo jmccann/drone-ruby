@@ -19,7 +19,7 @@ publish:
       matrix:
         RUBY_VERSION: 2.3
 
-  rubygem:
+  rubygems:
     api_key: $$RUBYGEMS_APIKEY
     name: droneio
     when:
