@@ -16,6 +16,9 @@
 
 require "representable/json"
 
+require_relative "key_representer"
+require_relative "netrc_representer"
+
 module Drone
   #
   # Transform `workspace` JSON payload
