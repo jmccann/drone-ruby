@@ -16,6 +16,11 @@
 
 require "representable/json"
 
+require_relative "build_representer"
+require_relative "repo_representer"
+require_relative "system_representer"
+require_relative "workspace_representer"
+
 module Drone
   #
   # Transform toplevel JSON payload
