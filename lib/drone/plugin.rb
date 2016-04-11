@@ -16,6 +16,9 @@
 
 require "json"
 
+require_relative "models/payload_representer"
+require_relative "models/payload"
+
 module Drone
   #
   # Plugin payload parser for Drone
